@@ -11,7 +11,7 @@ SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 600
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("ZoinksCombat")
+pygame.display.set_caption("ZoinksKombat")
 
 # set framerate
 clock = pygame.time.Clock()
@@ -19,7 +19,7 @@ FPS = 60
 
 # define colours
 RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
+GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 
 # define game variables
@@ -30,19 +30,21 @@ round_over = False
 ROUND_OVER_COOLDOWN = 2000
 
 # define fighter variables
-WARRIOR_SIZE = 100
-WARRIOR_SCALE = 4
-WARRIOR_OFFSET = [50, 23]
-WARRIOR_DATA = [WARRIOR_SIZE, WARRIOR_SCALE, WARRIOR_OFFSET]
-WIZARD_SIZE = 100
-WIZARD_SCALE = 4
-WIZARD_OFFSET = [50, 23]
-WIZARD_DATA = [WIZARD_SIZE, WIZARD_SCALE, WIZARD_OFFSET]
+SHAGGY_SIZE = 100
+SHAGGY_SCALE = 4
+SHAGGY_OFFSET = [50, 23]
+SHAGGY_DATA = [SHAGGY_SIZE, SHAGGY_SCALE, SHAGGY_OFFSET]
+HORSEMAN_SIZE = 100
+HORSEMAN_SCALE = 4
+HORSEMAN_OFFSET = [50, 23]
+HORSEMAN_DATA = [HORSEMAN_SIZE, HORSEMAN_SCALE, HORSEMAN_OFFSET]
 
 # load music and sounds
-pygame.mixer.music.load("assets/audio/music.mp3")
+pygame.mixer.music.load("assets/audio/song.mp3")
 pygame.mixer.music.set_volume(0.5)
-pygame.mixer.music.play(-1, 0.0, 5000)
+pygame.mixer.music.play(-1, 0.0, 0)
+punch_fx = pygame.mixer.Sound("assets/audio/punch.mp3")
+punch_fx.set_volume(0.5)
 sword_fx = pygame.mixer.Sound("assets/audio/sword.wav")
 sword_fx.set_volume(0.5)
 magic_fx = pygame.mixer.Sound("assets/audio/magic.wav")
@@ -53,22 +55,22 @@ bg_image = pygame.image.load(
     "assets/images/background/background.jpg").convert_alpha()
 
 # load spritesheets
-warrior_sheet = pygame.image.load(
-    "assets/images/warrior/Sprites/shaggy.png").convert_alpha()
-wizard_sheet = pygame.image.load(
-    "assets/images/wizard/Sprites/horseman.png").convert_alpha()
+SHAGGY_sheet = pygame.image.load(
+    "assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
+HORSEMAN_sheet = pygame.image.load(
+    "assets/images/horseman/Sprites/horseman.png").convert_alpha()
 
 # load vicory image
 victory_img = pygame.image.load(
     "assets/images/icons/victory.png").convert_alpha()
 
 # define number of steps in each animation
-WARRIOR_ANIMATION_STEPS = [6, 5, 3, 6, 3, 2, 3]
-WIZARD_ANIMATION_STEPS = [3, 3, 1, 6, 6, 2, 5]
+SHAGGY_ANIMATION_STEPS = [6, 5, 3, 6, 3, 2, 3]
+HORSEMAN_ANIMATION_STEPS = [3, 3, 1, 6, 6, 2, 5]
 
 # define font
-count_font = pygame.font.Font("assets/fonts/turok.ttf", 80)
-score_font = pygame.font.Font("assets/fonts/turok.ttf", 30)
+count_font = pygame.font.Font("assets/fonts/comic.TTF", 80)
+score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
 
 # function for drawing text
 
@@ -91,14 +93,14 @@ def draw_health_bar(health, x, y):
     ratio = health / 100
     pygame.draw.rect(screen, WHITE, (x - 2, y - 2, 404, 34))
     pygame.draw.rect(screen, RED, (x, y, 400, 30))
-    pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 30))
+    pygame.draw.rect(screen, GREEN, (x, y, 400 * ratio, 30))
 
 
 # create two instances of fighters
-fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA,
-                    warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
-fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA,
-                    wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
+fighter_1 = Fighter(1, 200, 310, False, SHAGGY_DATA,
+                    SHAGGY_sheet, SHAGGY_ANIMATION_STEPS, punch_fx, punch_fx)
+fighter_2 = Fighter(2, 700, 310, True, HORSEMAN_DATA,
+                    HORSEMAN_sheet, HORSEMAN_ANIMATION_STEPS, sword_fx, magic_fx)
 
 # game loop
 run = True
@@ -155,10 +157,10 @@ while run:
         if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
             round_over = False
             intro_count = 3
-            fighter_1 = Fighter(1, 200, 310, False, WARRIOR_DATA,
-                                warrior_sheet, WARRIOR_ANIMATION_STEPS, sword_fx)
-            fighter_2 = Fighter(2, 700, 310, True, WIZARD_DATA,
-                                wizard_sheet, WIZARD_ANIMATION_STEPS, magic_fx)
+            fighter_1 = Fighter(1, 200, 310, False, SHAGGY_DATA,
+                                SHAGGY_sheet, SHAGGY_ANIMATION_STEPS, punch_fx, punch_fx)
+            fighter_2 = Fighter(2, 700, 310, True, HORSEMAN_DATA,
+                                HORSEMAN_sheet, HORSEMAN_ANIMATION_STEPS, sword_fx, magic_fx)
 
     # event handler
     for event in pygame.event.get():
