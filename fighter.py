@@ -1,11 +1,8 @@
 import pygame
 
-
-# todo line 177
-
 class Fighter():
 
-    def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sound1, sound2):
+    def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sounds):
 
         self.player = player
 
@@ -41,7 +38,7 @@ class Fighter():
 
         self.attack_cooldown = 0
 
-        self.attack_sound = [sound1, sound2]
+        self.attack_sound = sounds
 
         self.hit = False
 
@@ -124,9 +121,6 @@ class Fighter():
                 # attack
 
                 if key[pygame.K_r] or key[pygame.K_t]:
-
-                    self.attack(target)
-
                     # determine which attack type was used
 
                     if key[pygame.K_r]:
@@ -136,6 +130,8 @@ class Fighter():
                     if key[pygame.K_t]:
 
                         self.attack_type = 2
+                    
+                    self.attack(target)
 
             # check player 2 controls
 
@@ -165,15 +161,15 @@ class Fighter():
 
                 # attack
 
-                if key[pygame.K_KP1] or key[pygame.K_KP2]:
+                if key[pygame.K_o] or key[pygame.K_p]:
 
                     # determine which attack type was used
 
-                    if key[pygame.K_KP1]:
+                    if key[pygame.K_o]:
 
                         self.attack_type = 1
 
-                    if key[pygame.K_KP2]:
+                    if key[pygame.K_p]:
 
                         self.attack_type = 2
 
@@ -322,11 +318,8 @@ class Fighter():
             self.attacking = True
 
             if (self.attack_type == 1):
-
                 self.attack_sound[0].play()
-
             else:
-
                 self.attack_sound[1].play()
 
             attacking_rect = pygame.Rect(self.rect.centerx - (
@@ -335,7 +328,10 @@ class Fighter():
 
             if attacking_rect.colliderect(target.rect):
 
-                target.health -= 10
+                if (self.attack_type == 1):
+                    target.health -= 20
+                else:
+                    target.health -= 10
 
                 target.hit = True
 
