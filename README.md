@@ -1,7 +1,7 @@
 # Rolea Theodor-Ioan, Mitran Andrei-Gabriel, Manea Dorin-Mihai
 # 323CA
 # Zoinks Combat
-# [Github Repository][https://github.com/TedyR10/ZoinksKombat]
+# [Github Repository](https://github.com/TedyR10/ZoinksKombat)
 
 ## Overview
     This project reiterates the beloved classic game Mortal Kombat in Python.
