@@ -4,11 +4,11 @@
 # [Github Repository](https://github.com/TedyR10/ZoinksKombat)
 
 ## Overview
-    This project reiterates the beloved classic game Mortal Kombat in Python. There is a twist though! 
-    The fighters are none other than some of our favorite Scooby Doo characters: Shaggy and the Headless Horseman. 
-    The game consists of two rounds or unlimited rounds if you're feeling saucy :weary:
-    
-    We hope you will have a great time playing it! Take a moment of appreciation for the soundtrack :relieved:
+   This project reiterates the beloved classic game Mortal Kombat in Python. There is a twist though! 
+The fighters are none other than some of our favorite Scooby Doo characters: Shaggy and the Headless Horseman. 
+The game consists of two rounds or unlimited rounds if you're feeling saucy :weary:
+
+We hope you will have a great time playing it! Take a moment of appreciation for the soundtrack :relieved:
 
 ## Used technologies
 - Python 3;
