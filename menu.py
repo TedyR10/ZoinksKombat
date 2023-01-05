@@ -98,7 +98,8 @@ def winner_screen(winner):
 
 	while running:
 		draw_bg()
-        	mx, my = pygame.mouse.get_pos()
+			
+		mx, my = pygame.mouse.get_pos()
 		
 		if (winner == 0):
 			draw_text('P1 WINS!', font, (0, 255, 0), screen, 440, 150)
@@ -153,7 +154,7 @@ def options(rounds):
 	while running:
 		draw_bg()
 		draw_text('LIKE ZOINKS SCOOB, THIS IS ONE OF THOSE OPTION SELECT THINGIES!', font, (0, 255, 0), screen, 20, 20)
-        	mx, my = pygame.mouse.get_pos()
+		mx, my = pygame.mouse.get_pos()
 		
 		if (rounds != -1):
 			draw_text('I SHALL MAKE QUICK WORK OF YOU...', font, (255, 0, 0), screen, 20, 60)
