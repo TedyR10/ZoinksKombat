@@ -14,16 +14,16 @@ def start_game(rounds):
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	pygame.display.set_caption("ZoinksKombat")
 
-    # used colours
+	# used colours
 	RED = (255, 0, 0)
 	GREEN = (0, 255, 0)
 	WHITE = (255, 255, 255)
 
 	# set framerate
-    FPS = 60
+	FPS = 60
 	clock = pygame.time.Clock()
 
-    # fighters variables
+	# fighters variables
 	SHAGGY_SIZE = 100
 	SHAGGY_SCALE = 4
 	SHAGGY_OFFSET = [50, 23]
@@ -37,16 +37,16 @@ def start_game(rounds):
 	round_over = False
 	ROUND_OVER_COOLDOWN = 2000
 
-    # players score
-    score = [0, 0]
+	# players score
+	score = [0, 0]
 
-    # load images
+	# load images
 	bg_image = pygame.image.load(
 		"assets/images/background/background.jpg").convert_alpha()
 	victory_img = pygame.image.load(
 		"assets/images/icons/victory.png").convert_alpha()
 
-    # load spritesheets
+	# load spritesheets
 	SHAGGY_sheet = pygame.image.load(
 		"assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
 	HORSEMAN_sheet = pygame.image.load(
@@ -63,8 +63,8 @@ def start_game(rounds):
 	magic_fx = pygame.mixer.Sound("assets/audio/magic.wav")
 	magic_fx.set_volume(0.75)
 
-    # set fonts
-    score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
+	# set fonts
+	score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
 	count_font = pygame.font.Font("assets/fonts/comic.TTF", 80)
 
 	# set steps count for each animation
