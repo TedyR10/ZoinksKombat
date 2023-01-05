@@ -1,59 +1,47 @@
-# Project Title: Street Fighter Clone Made in Python
+# Rolea Theodor-Ioan, Mitran Andrei-Gabriel, Manea Dorin-Mihai
+# 323CA
+# Zoinks Combat
+# [Github Repository][https://github.com/TedyR10/ZoinksKombat]
 
-## 1. Project Description:
+## Overview
+    This project reiterates the beloved classic game Mortal Kombat in Python.
+There is a twist though! The fighters are none other than some of our favorite
+Scooby Doo characters: Shaggy and the Headless Horseman. The game consists of
+two rounds or unlimited rounds if you're feeling saucy :weary:
+    We hope you will have a great time playing it! Take a moment of
+appreciation for the soundtrack :relieved:
 
+## Used technologies
+- Python 3;
+- pygame;
+- Photoshop;
+- Youtube to MP3 converter.
 
-This project is a Clone of the Street Fighter Game. It has been developed in Python programming language, using the Pygame library.
+## Instructions to run the game
+    First, install all the dependecies by running the install.sh script.
+Then run the game by running the Makefile.
 
+## Instructions to play the game
+    From the menu, click Play and you will be redirected to the game. The
+number of options can be chosen from the Options menu.
 
-## 2. Tech Stack:
+## Contributions of each member
+### Tedy
+- Created the animation logic for the characters;
+- Designed the spritesheets of the characters in Photoshop;
+- install.sh.
 
-- Python 3
-- Pygame
+### Andrei
+- Implemented the fighting logic;
+- Created the menus;
+- Makefile.
 
-URL: [https://www.pygame.org/news ](https://www.pygame.org/news)
+### Dorin
+- Combined the independent parts of the game into a single project;
+- Music and SFX;
+- README.md.
 
-
-## 3. Installing:
-
-1. Clone the git repo
-
-```
-https://github.com/russs123/brawler_tut.git
-```
-
-2. Open project folder
-
-3. Explore
-
-4. Open main.py and run
-
-5. Play the game
-
-Enjoy 😎
-
-
-## 4. Contributing:
-
-Pull requests are welcome. 
-
-For major changes, please open an issue first to discuss what you would like to change with project owner (Coding With Russ).
-
-
-## 5. Screen Recording:
-
-https://user-images.githubusercontent.com/15172744/190894691-c52ac22d-b76c-4890-9057-98eed66683a9.mp4
-
-
-## 6. Created By:
-
-Name: Coding With Russ
-
-Project Name: Street Fighter Style Fighting Game in Python using Pygame - Complete Tutorial
-
-Youtube: https://www.youtube.com/watch?v=s5bd9KMSSW4
-
-Github: https://github.com/russs123/brawler_tut
-
-
-
+## Encountered difficulties
+- The number of sprites for each animation;
+- Working in pygame;
+- Architecture of the project.
