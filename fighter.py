@@ -2,15 +2,15 @@ import pygame
 
 class Fighter():
 
-    def __init__(self, player, x, y, flip, data, sprite_sheet, animation_steps, sounds):
+    def __init__(self, player, x, y, flip, size, image_scale, offset, sprite_sheet, animation_steps, sounds):
 
         self.player = player
 
-        self.size = data[0]
+        self.size = size
 
-        self.image_scale = data[1]
+        self.image_scale = image_scale
 
-        self.offset = data[2]
+        self.offset = offset
 
         self.flip = flip
 

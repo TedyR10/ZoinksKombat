@@ -96,12 +96,63 @@ def game(rounds):
 	running = True
 	while running:
 
-		main.start_game(rounds)
+		winner = main.start_game(rounds)
+
+		winner_screen(winner)
 
 		running = False
 		pygame.display.update()
 		mainClock.tick(60)
 
+
+def winner_screen(winner):
+	running = True
+	click = False
+	while running:
+		draw_bg()
+		
+		if (winner == 0):
+			draw_text('P1 WINS!', font, (0, 255, 0), screen, 440, 150)
+		else:
+			draw_text('P2 WINS...', font, (255, 0, 0), screen, 440, 150)
+
+		mx, my = pygame.mouse.get_pos()
+
+		# creating buttons
+		button_1 = pygame.Rect(385, 260, 200, 50)
+		button_2 = pygame.Rect(385, 340, 200, 50)
+
+		# defining functions when a certain button is pressed
+		if button_1.collidepoint((mx, my)):
+			if click:
+				main_menu(2)
+		if button_2.collidepoint((mx, my)):
+			if click:
+				pygame.quit()
+				sys.exit()
+
+		pygame.draw.rect(screen, (153, 186, 221), button_1)
+		pygame.draw.rect(screen, (153, 186, 221), button_2)
+
+		# writing text on top of button
+		draw_text('MENU', font, (255, 255, 255), screen, 458, 275)
+		draw_text('QUIT', font, (255, 255, 255), screen, 460, 355)
+
+		click = False
+		for event in pygame.event.get():
+			if event.type == QUIT:
+				pygame.quit()
+				sys.exit()
+			if event.type == KEYDOWN:
+				if event.key == K_ESCAPE:
+					pygame.quit()
+					sys.exit()
+			if event.type == MOUSEBUTTONDOWN:
+				if event.button == 1:
+					click = True
+
+		pygame.display.update()
+		mainClock.tick(60)
 
 """
 This function is called when the "OPTIONS" button is clicked.
