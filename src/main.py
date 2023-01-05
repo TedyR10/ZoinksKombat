@@ -43,30 +43,30 @@ def start_game(rounds):
 
     # load images
     bg_image = pygame.image.load(
-        "assets/images/background/background.jpg").convert_alpha()
+        "./src/assets/images/background/background.jpg").convert_alpha()
     victory_img = pygame.image.load(
-        "assets/images/icons/victory.png").convert_alpha()
+        "./src/assets/images/icons/victory.png").convert_alpha()
 
     # load spritesheets
     SHAGGY_sheet = pygame.image.load(
-        "assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
+        "./src/assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
     HORSEMAN_sheet = pygame.image.load(
-        "assets/images/horseman/Sprites/horseman.png").convert_alpha()
+        "./src/assets/images/horseman/Sprites/horseman.png").convert_alpha()
 
     # load music and SFX
-    pygame.mixer.music.load("assets/audio/song.mp3")
+    pygame.mixer.music.load("./src/assets/audio/song.mp3")
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1, 0.0, 0)
-    punch_fx = pygame.mixer.Sound("assets/audio/punch.mp3")
+    punch_fx = pygame.mixer.Sound("./src/assets/audio/punch.mp3")
     punch_fx.set_volume(0.5)
-    sword_fx = pygame.mixer.Sound("assets/audio/sword.wav")
+    sword_fx = pygame.mixer.Sound("./src/assets/audio/sword.wav")
     sword_fx.set_volume(0.5)
-    magic_fx = pygame.mixer.Sound("assets/audio/magic.wav")
+    magic_fx = pygame.mixer.Sound("./src/assets/audio/magic.wav")
     magic_fx.set_volume(0.75)
 
     # set fonts
-    score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
-    count_font = pygame.font.Font("assets/fonts/comic.TTF", 80)
+    score_font = pygame.font.Font("./src/assets/fonts/comic.TTF", 30)
+    count_font = pygame.font.Font("./src/assets/fonts/comic.TTF", 80)
 
     # set steps count for each animation
     SHAGGY_ANIMATION_STEPS = [6, 5, 3, 6, 3, 2, 3]

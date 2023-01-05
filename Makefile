@@ -1,2 +1,2 @@
 run:
-	python3 menu.py 
+	python3 ./src/menu.py 
