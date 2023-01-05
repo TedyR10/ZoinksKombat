@@ -1,37 +1,29 @@
 import pygame
+
 from pygame import mixer
+
 from fighter import Fighter
 
-
 def start_game(rounds):
-
 	mixer.init()
 	pygame.font.init()
 
-	# create game window
+	# set window dimensions
 	SCREEN_WIDTH = 1000
 	SCREEN_HEIGHT = 600
-
 	screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 	pygame.display.set_caption("ZoinksKombat")
 
-	# set framerate
-	clock = pygame.time.Clock()
-	FPS = 60
-
-	# define colours
+    # used colours
 	RED = (255, 0, 0)
 	GREEN = (0, 255, 0)
 	WHITE = (255, 255, 255)
 
-	# define game variables
-	intro_count = 3
-	last_count_update = pygame.time.get_ticks()
-	score = [0, 0]  # player scores. [P1, P2]
-	round_over = False
-	ROUND_OVER_COOLDOWN = 2000
+	# set framerate
+    FPS = 60
+	clock = pygame.time.Clock()
 
-	# define fighter variables
+    # fighters variables
 	SHAGGY_SIZE = 100
 	SHAGGY_SCALE = 4
 	SHAGGY_OFFSET = [50, 23]
@@ -39,7 +31,28 @@ def start_game(rounds):
 	HORSEMAN_SCALE = 4
 	HORSEMAN_OFFSET = [50, 23]
 
-	# load music and sounds
+	# game variables
+	intro_count = 3
+	last_count_update = pygame.time.get_ticks()
+	round_over = False
+	ROUND_OVER_COOLDOWN = 2000
+
+    # players score
+    score = [0, 0]
+
+    # load images
+	bg_image = pygame.image.load(
+		"assets/images/background/background.jpg").convert_alpha()
+	victory_img = pygame.image.load(
+		"assets/images/icons/victory.png").convert_alpha()
+
+    # load spritesheets
+	SHAGGY_sheet = pygame.image.load(
+		"assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
+	HORSEMAN_sheet = pygame.image.load(
+		"assets/images/horseman/Sprites/horseman.png").convert_alpha()
+
+	# load music and SFX
 	pygame.mixer.music.load("assets/audio/song.mp3")
 	pygame.mixer.music.set_volume(0.5)
 	pygame.mixer.music.play(-1, 0.0, 0)
@@ -50,42 +63,22 @@ def start_game(rounds):
 	magic_fx = pygame.mixer.Sound("assets/audio/magic.wav")
 	magic_fx.set_volume(0.75)
 
-	# load background image
-	bg_image = pygame.image.load(
-		"assets/images/background/background.jpg").convert_alpha()
+    # set fonts
+    score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
+	count_font = pygame.font.Font("assets/fonts/comic.TTF", 80)
 
-	# load spritesheets
-	SHAGGY_sheet = pygame.image.load(
-		"assets/images/shaggy/Sprites/shaggy.png").convert_alpha()
-	HORSEMAN_sheet = pygame.image.load(
-		"assets/images/horseman/Sprites/horseman.png").convert_alpha()
-
-	# load vicory image
-	victory_img = pygame.image.load(
-		"assets/images/icons/victory.png").convert_alpha()
-
-	# define number of steps in each animation
+	# set steps count for each animation
 	SHAGGY_ANIMATION_STEPS = [6, 5, 3, 6, 3, 2, 3]
 	HORSEMAN_ANIMATION_STEPS = [3, 3, 1, 6, 6, 2, 5]
-
-	# define font
-	count_font = pygame.font.Font("assets/fonts/comic.TTF", 80)
-	score_font = pygame.font.Font("assets/fonts/comic.TTF", 30)
-
-	# function for drawing text
 
 	def draw_text(text, font, text_col, x, y):
 		img = font.render(text, True, text_col)
 		screen.blit(img, (x, y))
 
-	# function for drawing background
-
 	def draw_bg():
 		scaled_bg = pygame.transform.scale(
 			bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 		screen.blit(scaled_bg, (0, 0))
-
-	# function for drawing fighter health bars
 
 	def draw_health_bar(health, x, y):
 		ratio = health / 100
@@ -93,51 +86,46 @@ def start_game(rounds):
 		pygame.draw.rect(screen, RED, (x, y, 400, 30))
 		pygame.draw.rect(screen, GREEN, (x, y, 400 * ratio, 30))
 
-	# create two instances of fighters
+	# create two Fighter objects
 	fighter_1 = Fighter(1, 200, 310, False, SHAGGY_SIZE, SHAGGY_SCALE, SHAGGY_OFFSET,
 						SHAGGY_sheet, SHAGGY_ANIMATION_STEPS, [punch_fx, punch_fx])
 	fighter_2 = Fighter(2, 700, 310, True, HORSEMAN_SIZE, HORSEMAN_SCALE, HORSEMAN_OFFSET,
 						HORSEMAN_sheet, HORSEMAN_ANIMATION_STEPS, [sword_fx, magic_fx])
 
-	# game loop
+	# running game loop
 	run = True
 	while run:
 		clock.tick(FPS)
-
-		# draw background
 		draw_bg()
 
-		# show player stats
+		# display player stats
 		draw_health_bar(fighter_1.health, 20, 20)
 		draw_health_bar(fighter_2.health, 580, 20)
 		draw_text("P1: " + str(score[0]), score_font, RED, 20, 60)
 		draw_text("P2: " + str(score[1]), score_font, RED, 580, 60)
 
-		# update countdown
+		# countdown updater
 		if intro_count <= 0:
-			# move fighters
 			fighter_1.move(SCREEN_WIDTH, SCREEN_HEIGHT,
 						   screen, fighter_2, round_over)
 			fighter_2.move(SCREEN_WIDTH, SCREEN_HEIGHT,
 						   screen, fighter_1, round_over)
 		else:
-			# display count timer
+			# show timer
 			draw_text(str(intro_count), count_font, RED,
 					  SCREEN_WIDTH / 2 - 20, SCREEN_HEIGHT / 3)
-			# update count timer
+			# update timer
 			if (pygame.time.get_ticks() - last_count_update) >= 1000:
 				intro_count -= 1
 				last_count_update = pygame.time.get_ticks()
 
-		# update fighters
 		fighter_1.update()
 		fighter_2.update()
 
-		# draw fighters
 		fighter_1.draw(screen)
 		fighter_2.draw(screen)
 
-		# check for player defeat
+		# check final result for current round
 		if round_over == False:
 			if fighter_1.alive == False:
 				score[1] += 1
@@ -154,7 +142,6 @@ def start_game(rounds):
 						run = False
 						return i
 
-			# display victory image
 			screen.blit(victory_img, (360, 150))
 
 			if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
@@ -170,7 +157,6 @@ def start_game(rounds):
 			if event.type == pygame.QUIT:
 				run = False
 
-		# update display
 		pygame.display.update()
 
 	pygame.quit()
